@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Melio × Affidea — Prevenție Personalizată</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&family=Raleway:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ─── Design Tokens ─────────────────────────────── */
+      :root {
+        --c-dark: #28303c;
+        --c-medium: #697282;
+        --c-light: #ffffff;
+        --c-hover: #eff3f9;
+        --c-primary: #009966;
+        --c-primary-tint: #00bba21a;
+        --c-blue: #318eee;
+        --c-blue-tint: #318eee1a;
+        --c-orange: #f55f00;
+        --c-orange-tint: #fff7ed;
+        --c-red: #ec0040;
+        --c-purple: #8922fa;
+        --c-light-medium: #d7e0f0;
+
+        --shadow-card: 0 4px 16px rgba(0, 67, 195, 0.16);
+        --shadow-green: 0 4px 16px rgba(136, 235, 144, 0.4);
+
+        --r-lg: 16px;
+        --r-md: 12px;
+        --r-sm: 8px;
+        --r-pill: 999px;
+
+        --font: "Onest", "Raleway", ui-sans-serif, system-ui, -apple-system,
+          Segoe UI, Roboto, Helvetica, Arial;
+
+        --space-1: 8px;
+        --space-2: 12px;
+        --space-3: 16px;
+        --space-4: 20px;
+        --space-5: 28px;
+        --space-6: 40px;
+
+        --page-max: 1100px;
+        --section-v: 96px;
+        --section-h: 24px;
+      }
+
+      /* ─── Reset ─────────────────────────────────────── */
+      *, *::before, *::after { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font);
+        color: var(--c-dark);
+        background:
+          radial-gradient(1200px 800px at 50% 0%, rgba(255, 232, 160, 0.7) 0%, rgba(255, 255, 255, 0) 60%),
+          radial-gradient(900px 700px at 85% 80%, rgba(0, 153, 102, 0.12) 0%, rgba(255, 255, 255, 0) 60%),
+          radial-gradient(900px 700px at 10% 85%, rgba(49, 142, 238, 0.12) 0%, rgba(255, 255, 255, 0) 60%),
+          linear-gradient(180deg, #fffaf0 0%, #ffffff 60%, #fbfdff 100%);
+        background-attachment: fixed;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      /* ─── Navbar ─────────────────────────────────────── */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(40, 48, 60, 0.08);
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: rgba(0, 153, 102, 0.12);
+        display: grid;
+        place-items: center;
+        color: var(--c-primary);
+        font-weight: 900;
+        font-size: 18px;
+        letter-spacing: -0.04em;
+        flex-shrink: 0;
+      }
+
+      .brand-name {
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+        color: var(--c-dark);
+      }
+
+      .brand-sep {
+        color: var(--c-medium);
+        font-weight: 400;
+        margin: 0 2px;
+      }
+
+      .brand-partner {
+        color: var(--c-medium);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: var(--r-pill);
+        font-family: var(--font);
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        transition: opacity 0.15s, transform 0.15s;
+        text-decoration: none;
+      }
+
+      .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+      .btn:active { transform: translateY(0); }
+
+      .btn-primary {
+        background: var(--c-primary);
+        color: #fff;
+        box-shadow: var(--shadow-green);
+      }
+
+      .btn-outline {
+        background: rgba(255,255,255,0.8);
+        color: var(--c-dark);
+        border: 1px solid rgba(40,48,60,0.14);
+      }
+
+      .btn-lg {
+        padding: 16px 36px;
+        font-size: 17px;
+      }
+
+      /* ─── Page wrapper ───────────────────────────────── */
+      .page { overflow-x: hidden; }
+
+      /* ─── Section base ───────────────────────────────── */
+      .section {
+        padding: var(--section-v) var(--section-h);
+      }
+
+      .container {
+        max-width: var(--page-max);
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* ─── Typography ─────────────────────────────────── */
+      .kicker {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--c-medium);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0 0 var(--space-3) 0;
+      }
+
+      .h1 {
+        font-size: 54px;
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 0;
+      }
+
+      .h2 {
+        font-size: 36px;
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin: 0;
+      }
+
+      .h3 {
+        font-size: 24px;
+        line-height: 1.2;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+
+      .lead {
+        font-size: 19px;
+        line-height: 1.55;
+        font-weight: 500;
+        color: var(--c-medium);
+        margin: 0;
+      }
+
+      .body-text {
+        font-size: 16px;
+        line-height: 1.65;
+        font-weight: 500;
+        color: var(--c-medium);
+        margin: 0;
+      }
+
+      /* ─── Pill badges ────────────────────────────────── */
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: var(--r-pill);
+        font-size: 12px;
+        font-weight: 700;
+        border: 1px solid rgba(40, 48, 60, 0.10);
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--c-dark);
+      }
+      .pill-green {
+        color: var(--c-primary);
+        background: rgba(0, 153, 102, 0.08);
+        border-color: rgba(0, 153, 102, 0.2);
+      }
+      .pill-red {
+        color: var(--c-red);
+        background: rgba(236, 0, 64, 0.06);
+        border-color: rgba(236, 0, 64, 0.18);
+      }
+      .pill-blue {
+        color: var(--c-blue);
+        background: rgba(49, 142, 238, 0.08);
+        border-color: rgba(49, 142, 238, 0.18);
+      }
+      .pill-orange {
+        color: var(--c-orange);
+        background: rgba(245, 95, 0, 0.08);
+        border-color: rgba(245, 95, 0, 0.18);
+      }
+
+      /* ─── Card ───────────────────────────────────────── */
+      .card {
+        border-radius: var(--r-lg);
+        background: var(--c-light);
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(40, 48, 60, 0.06);
+        padding: 24px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin: 0 0 10px 0;
+        letter-spacing: -0.01em;
+      }
+
+      .card-text {
+        font-size: 15px;
+        line-height: 1.55;
+        font-weight: 500;
+        color: var(--c-medium);
+        margin: 0;
+      }
+
+      /* ─── Callout ────────────────────────────────────── */
+      .callout {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px 20px;
+        border-radius: var(--r-md);
+        border: 1px solid rgba(0, 153, 102, 0.16);
+        background: rgba(0, 153, 102, 0.06);
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 600;
+        color: var(--c-dark);
+      }
+
+      .callout-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* ─── Grid layouts ───────────────────────────────── */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--space-4);
+      }
+
+      /* ─── Divider ────────────────────────────────────── */
+      .divider {
+        height: 1px;
+        background: rgba(40, 48, 60, 0.08);
+        margin: 0;
+        border: none;
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* HERO                                            */
+      /* ════════════════════════════════════════════════ */
+      .hero {
+        padding: 100px var(--section-h) 80px;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero-badges {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+
+      .hero-headline {
+        font-size: 60px;
+        line-height: 1.04;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        margin: 0 auto 28px;
+        max-width: 860px;
+      }
+
+      .hero-headline em {
+        font-style: normal;
+        color: var(--c-primary);
+      }
+
+      .hero-sub {
+        font-size: 20px;
+        line-height: 1.55;
+        font-weight: 500;
+        color: var(--c-medium);
+        max-width: 680px;
+        margin: 0 auto 40px;
+      }
+
+      .hero-cta-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .hero-taglines {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 32px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--c-medium);
+      }
+
+      .hero-tagline-sep {
+        opacity: 0.35;
+      }
+
+      @media (max-width: 600px) {
+        .hero-tagline-sep { display: none; }
+        .hero-taglines { flex-direction: column; gap: 6px; }
+      }
+
+      .hero-note {
+        margin-top: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--c-medium);
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* PROBLEMA                                        */
+      /* ════════════════════════════════════════════════ */
+      .section-problema {
+        background: rgba(255,255,255,0.5);
+      }
+
+      .problema-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+
+      .stat-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3);
+        margin-top: 28px;
+      }
+
+      .stat-box {
+        padding: 20px;
+        border-radius: var(--r-lg);
+        background: var(--c-light);
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(40, 48, 60, 0.06);
+      }
+
+      .stat-num {
+        font-size: 36px;
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--c-primary);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .stat-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--c-medium);
+        line-height: 1.35;
+      }
+
+      .risk-list {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .risk-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--c-medium);
+        line-height: 1.5;
+      }
+
+      .risk-list li::before {
+        content: "→";
+        color: var(--c-red);
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .family-risk-box {
+        margin-top: 28px;
+        padding: 20px 24px;
+        border-radius: var(--r-lg);
+        border: 1px solid rgba(236, 0, 64, 0.14);
+        background: rgba(236, 0, 64, 0.04);
+      }
+
+      .family-risk-box .card-title {
+        color: var(--c-red);
+        margin-bottom: 14px;
+      }
+
+      .family-risk-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .family-risk-list li {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--c-medium);
+        line-height: 1.5;
+        display: flex;
+        gap: 8px;
+        align-items: baseline;
+      }
+
+      .family-risk-list li strong {
+        color: var(--c-dark);
+        font-weight: 700;
+      }
+
+      .quote-block {
+        margin-top: 28px;
+        padding: 20px 24px;
+        border-left: 3px solid var(--c-primary);
+        background: rgba(0, 153, 102, 0.04);
+        border-radius: 0 var(--r-md) var(--r-md) 0;
+        font-size: 16px;
+        font-weight: 600;
+        font-style: italic;
+        color: var(--c-medium);
+        line-height: 1.55;
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* DE CE CONTEAZĂ CÂND DESCOPERI                  */
+      /* ════════════════════════════════════════════════ */
+      .section-stadii {
+        background: rgba(255,255,255,0.7);
+      }
+
+      .stadii-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .stadii-header .lead {
+        margin-top: 16px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-card);
+      }
+
+      .stadii-table {
+        width: 100%;
+        min-width: 560px;
+        border-collapse: collapse;
+        background: var(--c-light);
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        font-size: 15px;
+      }
+
+      .stadii-table thead tr {
+        background: var(--c-dark);
+        color: #fff;
+      }
+
+      .stadii-table thead th {
+        padding: 16px 20px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: -0.01em;
+      }
+
+      .stadii-table thead th:first-child {
+        border-radius: var(--r-lg) 0 0 0;
+      }
+
+      .stadii-table thead th:last-child {
+        border-radius: 0 var(--r-lg) 0 0;
+      }
+
+      .stadii-table thead th.col-s1 { background: rgba(0, 153, 102, 0.85); }
+      .stadii-table thead th.col-s2 { background: rgba(245, 95, 0, 0.75); }
+      .stadii-table thead th.col-s3 { background: rgba(236, 0, 64, 0.75); }
+
+      .stadii-table tbody tr {
+        border-bottom: 1px solid rgba(40, 48, 60, 0.07);
+      }
+
+      .stadii-table tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      .stadii-table tbody tr:nth-child(even) {
+        background: rgba(40, 48, 60, 0.025);
+      }
+
+      .stadii-table tbody td {
+        padding: 16px 20px;
+        font-weight: 500;
+        color: var(--c-medium);
+        line-height: 1.4;
+        vertical-align: middle;
+      }
+
+      .stadii-table tbody td:first-child {
+        font-weight: 700;
+        color: var(--c-dark);
+        font-size: 14px;
+      }
+
+      .stadii-table .row-survival td {
+        font-weight: 800;
+        font-size: 16px;
+      }
+
+      .stadii-table .row-survival td:nth-child(2) { color: var(--c-primary); }
+      .stadii-table .row-survival td:nth-child(3) { color: var(--c-orange); }
+      .stadii-table .row-survival td:nth-child(4) { color: var(--c-red); }
+
+      .table-footnote {
+        text-align: center;
+        margin-top: 28px;
+        padding: 18px 24px;
+        border-radius: var(--r-lg);
+        border: 1px solid rgba(0, 153, 102, 0.16);
+        background: rgba(0, 153, 102, 0.06);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--c-primary);
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* SOLUȚIA                                         */
+      /* ════════════════════════════════════════════════ */
+      .solutia-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+      }
+
+      .solutia-benefits {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 20px;
+        border-radius: var(--r-lg);
+        background: var(--c-light);
+        box-shadow: var(--shadow-card);
+        border: 1px solid rgba(40, 48, 60, 0.06);
+      }
+
+      .benefit-icon {
+        font-size: 22px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .benefit-body { flex: 1; }
+
+      .benefit-title {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--c-dark);
+        margin: 0 0 4px 0;
+      }
+
+      .benefit-desc {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--c-medium);
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .phone-shot-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .phone-shot {
+        width: 100%;
+        max-width: 340px;
+        border-radius: 28px;
+        box-shadow: 0 20px 60px rgba(40, 48, 60, 0.22), 0 4px 16px rgba(0, 67, 195, 0.12);
+        border: 1px solid rgba(40, 48, 60, 0.08);
+        display: block;
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* OFERTA                                          */
+      /* ════════════════════════════════════════════════ */
+      .section-oferta {
+        background: rgba(255,255,255,0.5);
+      }
+
+      .oferta-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .pricing-card {
+        border-radius: 20px;
+        background: var(--c-dark);
+        color: #fff;
+        padding: 36px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pricing-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(600px 400px at 0% 0%, rgba(0, 153, 102, 0.3) 0%, transparent 65%),
+          radial-gradient(400px 300px at 100% 100%, rgba(49, 142, 238, 0.2) 0%, transparent 65%);
+        pointer-events: none;
+      }
+
+      .pricing-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: var(--r-pill);
+        background: rgba(0, 153, 102, 0.2);
+        color: #5dffc3;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      .pricing-price {
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        margin-bottom: 6px;
+        white-space: nowrap;
+      }
+
+      .pricing-price span {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        opacity: 0.7;
+      }
+
+      .pricing-period {
+        font-size: 15px;
+        font-weight: 500;
+        opacity: 0.65;
+        margin-bottom: 28px;
+      }
+
+      .pricing-divider {
+        height: 1px;
+        background: rgba(255,255,255,0.12);
+        margin-bottom: 24px;
+      }
+
+      .pricing-items {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pricing-items li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.4;
+        opacity: 0.9;
+      }
+
+      .pricing-items li .pi-icon {
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      .testimonial {
+        margin-top: 32px;
+        padding: 20px 24px;
+        border-radius: var(--r-lg);
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        font-size: 15px;
+        font-style: italic;
+        font-weight: 500;
+        opacity: 0.85;
+        line-height: 1.55;
+      }
+
+      .testimonial cite {
+        display: block;
+        margin-top: 10px;
+        font-style: normal;
+        font-weight: 700;
+        opacity: 0.7;
+        font-size: 13px;
+      }
+
+      .oferta-right {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        padding-top: 8px;
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* ALEGEREA                                        */
+      /* ════════════════════════════════════════════════ */
+      .alegerea-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 48px;
+      }
+
+      .path-card {
+        border-radius: 20px;
+        padding: 32px;
+      }
+
+      .path-card-a {
+        background: rgba(236, 0, 64, 0.04);
+        border: 1px solid rgba(236, 0, 64, 0.14);
+      }
+
+      .path-card-b {
+        background: rgba(0, 153, 102, 0.05);
+        border: 1px solid rgba(0, 153, 102, 0.18);
+      }
+
+      .path-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: var(--r-pill);
+        margin-bottom: 20px;
+      }
+
+      .path-label-a {
+        background: rgba(236, 0, 64, 0.10);
+        color: var(--c-red);
+      }
+
+      .path-label-b {
+        background: rgba(0, 153, 102, 0.12);
+        color: var(--c-primary);
+      }
+
+      .path-title {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0 0 20px 0;
+      }
+
+      .path-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+
+      .path-list li {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--c-medium);
+        line-height: 1.5;
+        display: flex;
+        gap: 10px;
+        align-items: baseline;
+      }
+
+      .path-list li::before {
+        content: "–";
+        flex-shrink: 0;
+        color: var(--c-medium);
+      }
+
+      .path-result {
+        margin-top: 24px;
+        padding: 14px 18px;
+        border-radius: var(--r-md);
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .path-result-a {
+        background: rgba(236, 0, 64, 0.08);
+        color: var(--c-red);
+      }
+
+      .path-result-b {
+        background: rgba(0, 153, 102, 0.1);
+        color: var(--c-primary);
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* MISIUNEA NOASTRĂ                                */
+      /* ════════════════════════════════════════════════ */
+      .section-misiune {
+        background:
+          radial-gradient(700px 500px at 80% 50%, rgba(0, 153, 102, 0.09) 0%, transparent 65%),
+          rgba(255,255,255,0.6);
+      }
+
+      .misiune-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      .misiune-points {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .misiune-point {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .misiune-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(0, 153, 102, 0.1);
+        display: grid;
+        place-items: center;
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+
+      .misiune-point-body {}
+
+      .misiune-point-title {
+        font-size: 15px;
+        font-weight: 800;
+        margin: 0 0 4px 0;
+        color: var(--c-dark);
+      }
+
+      .misiune-point-text {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--c-medium);
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .misiune-tagline {
+        margin-top: 32px;
+        padding: 20px 28px;
+        border-radius: var(--r-lg);
+        background: var(--c-primary);
+        color: #fff;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* FINAL CTA                                       */
+      /* ════════════════════════════════════════════════ */
+      .section-cta {
+        text-align: center;
+        padding: 120px var(--section-h);
+        position: relative;
+      }
+
+      .section-cta .h2 {
+        max-width: 600px;
+        margin: 0 auto 16px;
+      }
+
+      .section-cta .lead {
+        max-width: 480px;
+        margin: 0 auto 40px;
+      }
+
+      .section-cta-note {
+        margin-top: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--c-medium);
+      }
+
+      /* ─── Footer strip ───────────────────────────────── */
+      .footer {
+        padding: 24px var(--section-h);
+        border-top: 1px solid rgba(40, 48, 60, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .footer-copy {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--c-medium);
+      }
+
+      /* ─── Section header utility ─────────────────────── */
+      .section-header {
+        margin-bottom: 48px;
+      }
+
+      .section-header.centered {
+        text-align: center;
+      }
+
+      .section-header .lead {
+        margin-top: 16px;
+      }
+
+      /* ════════════════════════════════════════════════ */
+      /* RESPONSIVE                                      */
+      /* ════════════════════════════════════════════════ */
+
+      /* Tablet: 480–900px */
+      @media (max-width: 900px) {
+        :root {
+          --section-v: 64px;
+        }
+
+        .hero-headline { font-size: 44px; }
+        .h1 { font-size: 40px; }
+        .h2 { font-size: 28px; }
+
+        .problema-grid,
+        .solutia-layout,
+        .oferta-layout,
+        .misiune-layout,
+        .alegerea-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .phone-shot-wrap {
+          order: -1;
+        }
+
+        .phone-shot {
+          max-width: 260px;
+        }
+
+        .grid-2, .grid-3 {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-row {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      /* Mobile: < 480px */
+      @media (max-width: 480px) {
+        :root {
+          --section-v: 48px;
+          --section-h: 16px;
+        }
+
+        .hero { padding: 64px 16px 56px; }
+        .hero-headline { font-size: 34px; letter-spacing: -0.03em; }
+        .hero-sub { font-size: 17px; }
+        .h2 { font-size: 24px; }
+        .h3 { font-size: 20px; }
+        .lead { font-size: 16px; }
+
+        .navbar { padding: 0 16px; }
+        .brand-name { font-size: 14px; }
+        .btn-lg { padding: 14px 24px; font-size: 15px; }
+
+        .stat-row {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-price { font-size: 48px; }
+        .pricing-card { padding: 24px; }
+
+        .path-card { padding: 24px; }
+
+        .navbar .btn-primary { display: none; }
+
+        .misiune-layout { gap: 32px; }
+
+        .table-wrap {
+          border-radius: var(--r-md);
+        }
+
+        .hero-cta-group { flex-direction: column; align-items: stretch; }
+        .hero-cta-group .btn { justify-content: center; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+
+      <!-- ───────────────── NAVBAR ───────────────── -->
+      <header class="navbar">
+        <div class="navbar-brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-name">
+            melio <span class="brand-sep">×</span>
+            <span class="brand-partner">affidea</span>
+          </div>
+        </div>
+        <a href="https://melio.med" target="_blank" rel="noopener" class="btn btn-primary">
+          Testează Melio →
+        </a>
+      </header>
+
+      <!-- ───────────────── HERO ──────────────────── -->
+      <section class="hero" id="hero">
+        <div class="hero-badges">
+          <span class="pill pill-green">✦ Prevenție Personalizată</span>
+          <span class="pill">Parteneriat Melio × Affidea</span>
+          <span class="pill pill-blue">1 leu / zi</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Ignoranța costă viața.<br>
+          <em>Prevenția costă 1 leu pe zi.</em>
+        </h1>
+
+        <p class="hero-sub">
+          104.000 de cazuri noi în România, anul trecut. Majoritatea descoperite prea târziu.
+          Oprește ghicitul. Primește un plan clar, ghidat de medici.
+        </p>
+
+        <div class="hero-taglines">
+          <span>Cancerul nu așteaptă să fii „mai puțin ocupat".</span>
+          <span class="hero-tagline-sep">·</span>
+          <span>Corpul tău nu îți trimite notificări. Melio o face.</span>
+          <span class="hero-tagline-sep">·</span>
+          <span>Nu lăsa sănătatea pe „sper că sunt bine". Fii sigur.</span>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="https://melio.med" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+            Testează Melio →
+          </a>
+          <a href="#problema" class="btn btn-outline btn-lg">Descoperă cum funcționează</a>
+        </div>
+
+        <p class="hero-note">Include analize de sânge în valoare de 400 RON</p>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── PROBLEMA ──────────────── -->
+      <section class="section section-problema" id="problema">
+        <div class="container">
+          <div class="section-header">
+            <p class="kicker">Capitolul 1 — Problema</p>
+            <h2 class="h2">„Mă simt bine" este cea mai periculoasă minciună.</h2>
+            <p class="lead" style="margin-top:14px; color: var(--c-red); font-weight:700;">
+              Ce nu știi te poate ucide. La propriu. Ritmul tău de viață este aliatul bolii.
+            </p>
+          </div>
+
+          <div class="problema-grid">
+            <div>
+              <p class="body-text">
+                Mănânci sănătos. Încerci să faci sport. Te simți „bine".<br><br>
+                Dar în România, mortalitatea prin cancer este cu <strong>7% peste media UE</strong>.
+                De ce? Pentru că tratăm sănătatea ca pe un incendiu — reacționăm doar când vedem fumul.
+              </p>
+
+              <ul class="risk-list">
+                <li>1 din 8 femei riscă să dezvolte cancer de sân.</li>
+                <li>Doar 2,9% dintre noi fac screening pentru cancerul colorectal.</li>
+                <li>Diagnosticul vine adesea prea târziu pentru că nu am știut ce să căutăm sau când.</li>
+              </ul>
+
+              <blockquote class="quote-block">
+                „Lipsa de timp" este ascunzătoarea perfectă pentru amenințări tăcute.<br>
+                „Mă duc luna viitoare" devine rapid „Aș fi vrut să știu mai devreme".
+              </blockquote>
+            </div>
+
+            <div>
+              <div class="stat-row">
+                <div class="stat-box">
+                  <span class="stat-num">104k</span>
+                  <div class="stat-label">cazuri noi de cancer în România / an</div>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">+7%</span>
+                  <div class="stat-label">mortalitate față de media UE</div>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">2,9%</span>
+                  <div class="stat-label">rata de screening colorectal</div>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">1/8</span>
+                  <div class="stat-label">femei risc cancer de sân</div>
+                </div>
+              </div>
+
+              <div class="family-risk-box">
+                <div class="card-title">⚠️ Ai rude diagnosticate cu cancer? Riscul tău se schimbă dramatic.</div>
+                <ul class="family-risk-list">
+                  <li>
+                    Cancer de sân: de la ~12%
+                    → <strong>20–30%</strong> dacă ai o rudă de gradul I
+                  </li>
+                  <li>
+                    Cancer colorectal: de la ~5%
+                    → <strong>10–15%</strong> cu antecedente familiale
+                  </li>
+                  <li>
+                    Cancer pulmonar: <strong>riscul se dublează</strong> dacă un
+                    părinte fumător a fost diagnosticat
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── STADII ─────────────────── -->
+      <section class="section section-stadii" id="stadii">
+        <div class="container">
+          <div class="stadii-header">
+            <p class="kicker">De ce contează când descoperi</p>
+            <h2 class="h2">Aceeași boală. Rezultate complet diferite.</h2>
+            <p class="lead">Nu boala te omoară. Momentul descoperirii te omoară.</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="stadii-table">
+              <thead>
+                <tr>
+                  <th>Caracteristică</th>
+                  <th class="col-s1">✓ Stadiul 1</th>
+                  <th class="col-s2">Stadiul 2</th>
+                  <th class="col-s3">Stadiul 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dimensiunea tumorii</td>
+                  <td>Mică, localizată</td>
+                  <td>Mai mare, posibil ganglioni implicați</td>
+                  <td>Tumoră mare, ganglioni afectați</td>
+                </tr>
+                <tr>
+                  <td>Ganglioni limfatici</td>
+                  <td>Neafectați</td>
+                  <td>Posibil afectați</td>
+                  <td>Afectați regional</td>
+                </tr>
+                <tr>
+                  <td>Șansa de recidivă</td>
+                  <td>Sub 5%</td>
+                  <td>10–20%</td>
+                  <td>30–50%</td>
+                </tr>
+                <tr class="row-survival">
+                  <td>Rata de supraviețuire</td>
+                  <td>90–99%</td>
+                  <td>70–85%</td>
+                  <td>40–70%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="table-footnote">
+            Melio există pentru ca tu să fii mereu în coloana din stânga.
+          </p>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── SOLUȚIA ────────────────── -->
+      <section class="section" id="solutia">
+        <div class="container">
+          <div class="section-header">
+            <p class="kicker">Capitolul 2 — Soluția</p>
+            <h2 class="h2">Transformă anxietatea în strategie.</h2>
+            <p class="lead">Melio: Sistemul de Operare pentru Sănătatea Ta.</p>
+            <p class="lead" style="margin-top:8px;">Nu mai spera. Începe să știi.</p>
+          </div>
+
+          <div class="solutia-layout">
+            <div class="solutia-benefits">
+              <p class="body-text" style="margin-bottom: 8px;">
+                Melio înlocuiește panica de pe Google cu un plan clar.
+                Transformăm „speranța" în „certitudine".
+              </p>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">✅</div>
+                <div class="benefit-body">
+                  <p class="benefit-title">Strategie, nu Meniu</p>
+                  <p class="benefit-desc">Un plan de screening construit de medici reali, personalizat pe riscurile, vârsta și istoricul tău.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">✅</div>
+                <div class="benefit-body">
+                  <p class="benefit-title">Acțiune, nu Haos</p>
+                  <p class="benefit-desc">Îți spunem exact ce să testezi și când. Fără confuzie.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">✅</div>
+                <div class="benefit-body">
+                  <p class="benefit-title">Interpretare, nu Google</p>
+                  <p class="benefit-desc">Rezultatele tale sunt revizuite de specialiști care ți le explică pe limba ta. Fără panică.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">✅</div>
+                <div class="benefit-body">
+                  <p class="benefit-title">Plasă de Siguranță</p>
+                  <p class="benefit-desc">Noi monitorizăm sănătatea ta tot anul, ca tu să nu trebuiască să ții minte.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="phone-shot-wrap">
+              <img
+                src="mobile-app.jpg"
+                alt="Aplicația Melio — Melio Score pe mobil"
+                class="phone-shot"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── OFERTA ─────────────────── -->
+      <section class="section section-oferta" id="oferta">
+        <div class="container">
+          <div class="section-header">
+            <p class="kicker">Capitolul 3 — Oferta</p>
+            <h2 class="h2">Cea mai inteligentă investiție de 1 leu pe care o poți face.</h2>
+          </div>
+
+          <div class="oferta-layout">
+            <div class="pricing-card">
+              <div class="pricing-badge">✦ Abonament Melio</div>
+              <div class="pricing-price">1 <span>LEU</span></div>
+              <div class="pricing-period">pe zi — adică 365 LEI / an</div>
+              <div class="pricing-divider"></div>
+              <ul class="pricing-items">
+                <li>
+                  <span class="pi-icon">🩸</span>
+                  <span><strong>Set Complet de Analize de Sânge</strong> (Valoare: ±400 RON) – Inclus.</span>
+                </li>
+                <li>
+                  <span class="pi-icon">🧬</span>
+                  <span><strong>Evaluare de Risc Ghidată de Medic</strong> – Îți mapăm riscurile genetice și de stil de viață.</span>
+                </li>
+                <li>
+                  <span class="pi-icon">📅</span>
+                  <span><strong>Calendar Personalizat de Screening</strong> – Harta ta pentru următoarele 12 luni.</span>
+                </li>
+                <li>
+                  <span class="pi-icon">📂</span>
+                  <span><strong>Seif Medical Digital</strong> – Tot istoricul tău, organizat și accesibil oricând.</span>
+                </li>
+                <li>
+                  <span class="pi-icon">🚩</span>
+                  <span><strong>Monitorizare „Red Flag"</strong> – Dacă ceva arată suspect, noi îți spunem exact ce să faci.</span>
+                </li>
+              </ul>
+              <blockquote class="testimonial">
+                „Aveam un teanc de PDF-uri și multă îngrijorare. Acum am un plan."
+                <cite>— Andrei M., Membru Melio</cite>
+              </blockquote>
+            </div>
+
+            <div class="oferta-right">
+              <div class="callout">
+                <span class="callout-icon">💡</span>
+                <div>
+                  <strong>Prevenție de top. Preț accesibil oricui.</strong><br>
+                  Liniștea ta costă mai puțin decât cafeaua de dimineață.
+                </div>
+              </div>
+              <div class="card">
+                <p class="card-title">Melio × Affidea — Avantajul integrării</p>
+                <p class="card-text">
+                  Parteneriatul cu Affidea permite accesul la o rețea de laboratoare
+                  de înaltă calitate, reducând fricțiunea dintre recomandare și
+                  execuție. Pacientul primește planul, Affidea execută analizele —
+                  un workflow complet, fără discontinuități.
+                </p>
+              </div>
+              <div class="card">
+                <p class="card-title">De ce acum?</p>
+                <p class="card-text">
+                  România are rata de screening printre cele mai scăzute din UE.
+                  Există un gap uriaș de adresare — și o oportunitate de piață
+                  reală pentru cine o acoperă primul.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── ALEGEREA ───────────────── -->
+      <section class="section" id="alegerea">
+        <div class="container">
+          <div class="section-header centered">
+            <p class="kicker">Capitolul 4 — Alegerea</p>
+            <h2 class="h2">Două moduri de a trăi. Unul singur îți oferă control.</h2>
+            <p class="lead">Reactiv sau Proactiv? Viitorul tău depinde de ce faci azi.</p>
+          </div>
+
+          <div class="alegerea-grid">
+            <div class="path-card path-card-a">
+              <div class="path-label path-label-a">🔴 Calea A — „Default"</div>
+              <h3 class="path-title">Fără plan</h3>
+              <ul class="path-list">
+                <li>Te bazezi pe memorie și pe „mă simt ok".</li>
+                <li>Cauți simptome pe Google la 2 dimineața.</li>
+                <li>Aștepți până te doare ceva ca să mergi la medic.</li>
+              </ul>
+              <div class="path-result path-result-a">
+                ⚠️ Riscul: Să afli când e prea târziu.
+              </div>
+            </div>
+
+            <div class="path-card path-card-b">
+              <div class="path-label path-label-b">🟢 Calea B — Melio</div>
+              <h3 class="path-title">Cu plan</h3>
+              <ul class="path-list">
+                <li>Urmezi un plan clar, bazat pe date.</li>
+                <li>Prinzi problemele când sunt mici și rezolvabile.</li>
+                <li>Ai un medic în colțul tău, tot anul.</li>
+              </ul>
+              <div class="path-result path-result-b">
+                ✓ Rezultatul: Trăiești mai mult, mai sănătos și fără anxietate.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── MISIUNEA ───────────────── -->
+      <section class="section section-misiune" id="misiune">
+        <div class="container">
+          <div class="misiune-layout">
+            <div>
+              <p class="kicker">Misiunea noastră</p>
+              <h2 class="h2">Construim o societate care trăiește mai mult, mai sănătos.</h2>
+              <p class="body-text" style="margin-top: 20px;">
+                România pierde în fiecare an mii de oameni din cauza cancerelor
+                descoperite prea târziu — nu pentru că medicina nu poate face mai
+                mult, ci pentru că oamenii nu au acces la informație clară, la timp.
+              </p>
+            </div>
+
+            <div>
+              <div class="misiune-points">
+                <div class="misiune-point">
+                  <div class="misiune-icon">🎯</div>
+                  <div class="misiune-point-body">
+                    <p class="misiune-point-title">Impact măsurabil</p>
+                    <p class="misiune-point-text">
+                      Dacă am reduce cu 10% numărul de diagnostice în stadiu
+                      avansat, am salva mii de vieți pe an numai în România.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="misiune-point">
+                  <div class="misiune-icon">🧬</div>
+                  <div class="misiune-point-body">
+                    <p class="misiune-point-title">Acces democratic la prevenție</p>
+                    <p class="misiune-point-text">
+                      Cunoașterea riscului tău nu este un lux. Este un drept —
+                      și vrem să îl facem accesibil pentru oricine, la 1 leu/zi.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="misiune-point">
+                  <div class="misiune-icon">🌍</div>
+                  <div class="misiune-point-body">
+                    <p class="misiune-point-title">Infrastructură de prevenție</p>
+                    <p class="misiune-point-text">
+                      Investind în Melio, nu plătești doar pentru sănătatea ta.
+                      Contribui la schimbarea modului în care România se
+                      raportează la boală.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="misiune-tagline">
+                Prevenim astăzi. Câștigăm decenii.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- ───────────────── FINAL CTA ──────────────── -->
+      <section class="section section-cta" id="cta">
+        <div class="container">
+          <p class="kicker" style="text-align:center;">Pasul următor</p>
+          <h2 class="h2">Sănătatea este singurul activ pe care nu îl poți răscumpăra.</h2>
+          <p class="lead">Nu îți lăsa viața la voia întâmplării. Asigură-ți viitorul astăzi.</p>
+          <p class="lead" style="font-style:italic; margin-top:-8px;">
+            Nu aștepta simptomele. Preia controlul acum cu un plan personalizat și o echipă de medici de partea ta.
+          </p>
+          <a href="https://melio.med" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+            Ia-ți abonamentul Melio cu 1 leu/zi →
+          </a>
+          <p class="section-cta-note">Parteneriat Melio × Affidea · melio.med</p>
+        </div>
+      </section>
+
+      <!-- ───────────────── FOOTER ──────────────────── -->
+      <footer class="footer">
+        <div class="footer-copy">
+          © 2025 Melio. Parteneriat propus cu Affidea România.
+        </div>
+        <div class="navbar-brand" style="gap:8px;">
+          <div class="brand-mark" style="width:26px;height:26px;font-size:14px;">M</div>
+          <span style="font-size:13px;font-weight:700;letter-spacing:-0.01em;color:var(--c-medium);">
+            melio × affidea
+          </span>
+        </div>
+      </footer>
+
+    </div><!-- /.page -->
+
+    <script>
+      // Smooth navbar shadow on scroll
+      const nav = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        nav.style.boxShadow = window.scrollY > 10
+          ? '0 2px 20px rgba(40,48,60,0.10)'
+          : 'none';
+      }, { passive: true });
+    </script>
+  </body>
+</html>
